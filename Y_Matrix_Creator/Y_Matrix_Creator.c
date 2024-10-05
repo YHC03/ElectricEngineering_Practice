@@ -57,7 +57,7 @@ long double ImagValCalc(long double R, long double X)
 * 기능: Y-Matrix 메모리에 새로운 값을 추가한다.
 * 입력값: yMatrix 주소, cursor(추가할 위치), node1, node2(선로의 연결부), R, L, C값
 * 출력값 없음
-* 최종 수정일: 2024/10/04
+* 최종 수정일: 2024/10/05
 */
 void memoryAddWrite(Y_Matrix* yMatrix, long long int cursor, long long int node1, long long int node2, long double R, long double L, long double C)
 {
@@ -70,7 +70,7 @@ void memoryAddWrite(Y_Matrix* yMatrix, long long int cursor, long long int node1
     {
         yMatrix[cursor].realNum = RealValCalc(R, L);
         yMatrix[cursor].imagNum = ImagValCalc(R, L) + C / 2;
-    }else{ // 두 선로의 위치가 같은 경우(- Line 어드미턴스)
+    }else{ // 두 선로의 위치가 다른 경우(- Line 어드미턴스)
         yMatrix[cursor].realNum = - RealValCalc(R, L);
         yMatrix[cursor].imagNum = - ImagValCalc(R, L);
     }
@@ -82,7 +82,7 @@ void memoryAddWrite(Y_Matrix* yMatrix, long long int cursor, long long int node1
 * 기능: Y-Matrix 메모리에 새로운 값을 음수로 추가한다.
 * 입력값: yMatrix 주소, cursor(추가할 위치), node1, node2(선로의 연결부), R, L, C값
 * 출력값 없음
-* 최종 수정일: 2024/10/04
+* 최종 수정일: 2024/10/05
 */
 void memorySubtractWrite(Y_Matrix* yMatrix, long long int cursor, long long int node1, long long int node2, long double R, long double L, long double C)
 {
@@ -95,7 +95,7 @@ void memorySubtractWrite(Y_Matrix* yMatrix, long long int cursor, long long int 
     {
         yMatrix[cursor].realNum = - RealValCalc(R, L);
         yMatrix[cursor].imagNum = - ImagValCalc(R, L) - C / 2;
-    }else{ // 두 선로의 위치가 같은 경우(- Line 어드미턴스)
+    }else{ // 두 선로의 위치가 다른 경우(- Line 어드미턴스)
         yMatrix[cursor].realNum = RealValCalc(R, L);
         yMatrix[cursor].imagNum = ImagValCalc(R, L);
     }
@@ -107,7 +107,7 @@ void memorySubtractWrite(Y_Matrix* yMatrix, long long int cursor, long long int 
 * 기능: Y-Matrix 메모리의 기존값에 새로운 값을 더하고, 해당 어드미턴스 값이 0인 경우 해당 정보를 제거한다.
 * 입력값: yMatrix 주소, cursor(추가할 위치), node1, node2(선로의 연결부), R, L, C값
 * 출력값 없음
-* 최종 수정일: 2024/10/04
+* 최종 수정일: 2024/10/05
 */
 void memoryAdd(Y_Matrix* yMatrix, long long int cursor, long long int node1, long long int node2, long double R, long double L, long double C)
 {
@@ -116,7 +116,7 @@ void memoryAdd(Y_Matrix* yMatrix, long long int cursor, long long int node1, lon
     {
         yMatrix[cursor].realNum += RealValCalc(R, L);
         yMatrix[cursor].imagNum += ImagValCalc(R, L) + C / 2;
-    }else{ // 두 선로의 위치가 같은 경우(- Line 어드미턴스)
+    }else{ // 두 선로의 위치가 다른 경우(- Line 어드미턴스)
         yMatrix[cursor].realNum += -RealValCalc(R, L);
         yMatrix[cursor].imagNum += -ImagValCalc(R, L);
     }
@@ -136,7 +136,7 @@ void memoryAdd(Y_Matrix* yMatrix, long long int cursor, long long int node1, lon
 * 기능: Y-Matrix 메모리의 기존값에 새로운 값을 빼고, 해당 어드미턴스 값이 0인 경우 해당 정보를 제거한다.
 * 입력값: yMatrix 주소, cursor(추가할 위치), node1, node2(선로의 연결부), R, L, C값
 * 출력값: 해당 위치의 전체 어드미턴스가 0인 여부
-* 최종 수정일: 2024/10/04
+* 최종 수정일: 2024/10/05
 */
 void memorySubtract(Y_Matrix* yMatrix, long long int cursor, long long int node1, long long int node2, long double R, long double L, long double C)
 {
@@ -145,7 +145,7 @@ void memorySubtract(Y_Matrix* yMatrix, long long int cursor, long long int node1
     {
         yMatrix[cursor].realNum -= RealValCalc(R, L);
         yMatrix[cursor].imagNum -= ImagValCalc(R, L) + C / 2;
-    }else{ // 두 선로의 위치가 같은 경우(- Line 어드미턴스)
+    }else{ // 두 선로의 위치가 다른 경우(- Line 어드미턴스)
         yMatrix[cursor].realNum -= -RealValCalc(R, L);
         yMatrix[cursor].imagNum -= -ImagValCalc(R, L);
     }
