@@ -15,7 +15,7 @@
 * 실행 시, 입력 파일을 인수로 받아, 이를 해석한다.
 * 
 * 작성자: YHC03
-* 최종 수정일: 2024/10/05
+* 최종 수정일: 2024/10/06
 */
 
 
@@ -113,12 +113,12 @@ Y_Matrix::~Y_Matrix()
 * 기능: lineValue Vector에서 특정 node의 값을 가진 값의 위치를 찾는다.
 * 입력값: node1, node2
 * 출력값: lineValue Vector에서 해당 node의 값이 저장된 위치(저장되지 않은 경우, -1 반환)
-* 최종 수정일: 2024/10/05
+* 최종 수정일: 2024/10/06
 */
 long long int Y_Matrix::findMatrix(long long int Node1, long long int Node2)
 {
     // vector의 길이만큼 반복
-    for (long long int i = 0; i < lineValue.size(); i++)
+    for (unsigned long long int i = 0; i < lineValue.size(); i++)
     {
         // 해당 node의 값을 찾은 경우, 해당 위치 출력
         if (lineValue[i].node1 == Node1 && lineValue[i].node2 == Node2)
@@ -256,19 +256,14 @@ void Y_Matrix::subtractMatrix(long long int Node1, long long int Node2, long dou
 * 기능: Y-Matrix에 특정 node의 값을 추가하도록 한다.
 * 입력값: Node1, Node2, R, L, C값
 * 출력값 없음
-* 최종 수정일: 2024/10/05
+* 최종 수정일: 2024/10/06
 */
 void Y_Matrix::addMatrixPackage(long long int Node1, long long int Node2, long double R, long double L, long double C)
 {
-    // Swap 실행용 변수 선언
-    long long int tmp;
-
     // node1 > node2인 경우, 두 값을 서로 바꾼다.
     if (Node1 > Node2)
     {
-        tmp = Node1;
-        Node1 = Node2;
-        Node2 = tmp;
+        std::swap(Node1, Node2);
     }
 
     // node1 추가
@@ -286,19 +281,14 @@ void Y_Matrix::addMatrixPackage(long long int Node1, long long int Node2, long d
 * 기능: Y-Matrix에 특정 node의 값을 감산하도록 한다.
 * 입력값: Node1, Node2, R, L, C값
 * 출력값 없음
-* 최종 수정일: 2024/10/05
+* 최종 수정일: 2024/10/06
 */
 void Y_Matrix::subtractMatrixPackage(long long int Node1, long long int Node2, long double R, long double L, long double C)
 {
-    // Swap 실행용 변수 선언
-    long long int tmp;
-
     // node1 > node2인 경우, 두 값을 서로 바꾼다.
     if (Node1 > Node2)
     {
-        tmp = Node1;
-        Node1 = Node2;
-        Node2 = tmp;
+        std::swap(Node1, Node2);
     }
 
     // node1 감산
@@ -324,14 +314,12 @@ long double* Y_Matrix::getMatrix(long long int Node1, long long int Node2)
     static long double matrixVal[2] = {0, 0};
 
     // 내부 변수 선언
-    long long int tmp, location; // 순서대로 Swap용 변수, lineValue vector에서 원하는 값의 위치를 나타내는 변수
+    long long int location; // lineValue vector에서 원하는 값의 위치를 나타내는 변수
 
     // node1 > node2인 경우, 두 값을 서로 바꾼다.
     if (Node1 > Node2)
     {
-        tmp = Node1;
-        Node1 = Node2;
-        Node2 = tmp;
+        std::swap(Node1, Node2);
     }
 
     // 입력받은 두 node의 값을 가지고 있는 위치를 찾는다.
